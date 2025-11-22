@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Info Panel</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDPXv7lI-YcPk2FECNiM61yZ_SsVU-vR2M",
+      authDomain: "nitin-494ef.firebaseapp.com",
+      databaseURL: "https://nitin-494ef-default-rtdb.asia-southeast1.firebasedatabase.app/",
+      projectId: "nitin-494ef",
+      storageBucket: "nitin-494ef.firebasestorage.app",
+      messagingSenderId: "806134093724",
+      appId: "1:806134093724:web:d749b676504569c92e9a59",
+      measurementId: "G-MWH4YB8C20"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <style>
+    body{background:#0d0d0d;color:#fff;font-family:sans-serif;margin:0;padding:16px}
+    #map{height:420px;border-radius:12px;margin-bottom:12px}
+    .box{background:#111;padding:12px;border-radius:10px;margin-bottom:12px}
+  </style>
+</head>
+<body>
+
+<h2>📍 Live Map</h2>
+<div id="map"></div>
+
+<h2>📩 Messages</h2>
+<div id="msgs" class="box">Loading...</div>
+
+<script>
+let map = L.map('map').setView([20, 78], 5);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+let marker=null;
+
+// Live GPS
+firebase.database().ref("location").on("value", snap=>{
+  const d=snap.val();
+  if(!d) return;
+  if(!marker){
+    marker=L.marker([d.lat,d.lon]).addTo(map);
+  } else {
+    marker.setLatLng([d.lat,d.lon]);
+  }
+  map.setView([d.lat,d.lon],16);
+});
+
+// Live Messages
+firebase.database().ref("messages").on("value", snap=>{
+  const box=document.getElementById("msgs");
+  const data=snap.val();
+  if(!data){ box.innerHTML="No messages yet"; return; }
+  box.innerHTML = Object.values(data).map(m=>`<div>${m.text}</div>`).join("");
+});
+</script>
+
+</body>
+</html>
