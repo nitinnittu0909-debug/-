@@ -163,3 +163,10 @@ button:hover {
   opacity: 0.45;
   font-size: 12px;
 }
+.msg {
+  padding: 10px;
+  margin: 8px 0;
+  background: #222;
+  color: white;
+  border-radius: 8px;
+}
