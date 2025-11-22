@@ -3,29 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cute Message</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>💖 Cute Message</title>
 
-  <!-- Firebase -->
+  <!-- Firebase v8 Script (NO imports needed) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-  <script>
-    var firebaseConfig = {
-      apiKey: "AIzaSyDPXv7lI-YcPk2FECNiM61yZ_SsVU-vR2M",
-      authDomain: "nitin-494ef.firebaseapp.com",
-      databaseURL: "https://nitin-494ef-default-rtdb.asia-southeast1.firebasedatabase.app/",
-      projectId: "nitin-494ef",
-      storageBucket: "nitin-494ef.firebasestorage.app",
-      messagingSenderId: "806134093724",
-      appId: "1:806134093724:web:d749b676504569c92e9a59",
-      measurementId: "G-MWH4YB8C20"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div id="hearts"></div>
+
   <main class="panel" id="mainPanel">
     <section class="card" id="card">
       <h1 id="title">...</h1>
@@ -33,6 +22,7 @@
       <div class="btns" id="controls"></div>
     </section>
   </main>
+
   <div class="toast-wrap" id="toasts"></div>
   <div class="watermark">develop by nitin rawat</div>
 
